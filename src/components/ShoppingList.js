@@ -3,10 +3,25 @@ import Item from "./Item";
 
 function ShoppingList({ items }) {
   const [selectedCategory, setSelectedCategory] = useState("All")
+  let newMap
 
   function handleChange(event) {
     setSelectedCategory(event.target.value)
   }
+
+  function filterCategories() {
+    newMap = []
+    items.filter(item => {
+      if (item.category === selectedCategory){
+        newMap.push(item)
+      } else if (selectedCategory === "All") {
+        newMap = [...items]
+      }
+      return newMap
+    })
+  }
+
+  filterCategories()
 
   return (
     <div className="ShoppingList">
@@ -19,10 +34,9 @@ function ShoppingList({ items }) {
         </select>
       </div>
       <ul className="Items">
-        {items.filter((item) => selectedCategory === "All" ? true : item.category === selectedCategory)
-          .map((item) =>
-            <Item key={item.id} name={item.name} category={item.category} />
-        )}
+        {newMap.map((item) => (
+          <Item key={item.id} name={item.name} category={item.category} />
+        ))}
       </ul>
     </div>
   );
