@@ -9,19 +9,15 @@ function ShoppingList({ items }) {
     setSelectedCategory(event.target.value)
   }
 
-  function filterCategories() {
-    newMap = []
-    items.filter(item => {
-      if (item.category === selectedCategory){
-        newMap.push(item)
-      } else if (selectedCategory === "All") {
-        newMap = [...items]
-      }
-      return newMap
-    })
-  }
-
-  filterCategories()
+  newMap = []
+  items.filter(item => {
+    if (item.category === selectedCategory) {
+      newMap.push(item)
+    } else if (selectedCategory === "All") {
+      newMap = [...items]
+    }
+    return newMap
+  })
 
   return (
     <div className="ShoppingList">
